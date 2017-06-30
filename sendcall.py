@@ -9,6 +9,6 @@ client = Client(account_sid, auth_token)
 
 call = client.calls.create(to="+16175159619", 
     					   from_="+14054001401",
-    					   url="http://thushanp.github.io/parth")
+    					   url="http://twimlets.com/holdmusic?Bucket=com.twilio.music.ambient")
 
 print(call.sid)
