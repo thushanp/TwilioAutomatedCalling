@@ -8,7 +8,6 @@ auth_token  = "5e7b2c6563764d0d62dc00e18e1b5853"
 client = Client(account_sid, auth_token)
 
 call = client.calls.create(to="+16175159619", 
-    					   from_="+14054001401",
-    					   url="https://demo.twilio.com/docs/voice.xml")
+    					   from_="+14054001401")
 
-print(call.sid)
+response.play('https://api.twilio.com/cowbell.mp3')
