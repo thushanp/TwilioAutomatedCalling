@@ -21,7 +21,7 @@ def detect_humans():
  
     return str(r)
  
-call = client.calls.create(to="YOUR_NUMBER", from_="YOUR_TWILIO_NUMBER",
+call = client.calls.create(to="+16175159619", from_="+14054001401",
                            url="YOUR_VOICE_URL")
  
 if __name__ == "__main__":
