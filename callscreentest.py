@@ -9,8 +9,8 @@ auth_token = "5e7b2c6563764d0d62dc00e18e1b5853"
 client = TwilioRestClient(account_sid, auth_token)
 
 app = Flask(__name__)
- 
- 
+
+
 @app.route('/voice', methods=['POST'])
 def detect_humans():
     r = twiml.Response()
