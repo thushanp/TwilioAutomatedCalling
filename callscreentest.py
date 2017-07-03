@@ -1,28 +1,24 @@
 from flask import Flask
-
-from twilio import twiml
-from twilio.rest import TwilioRestClient
-
-
-account_sid = "ACf0bef51e5a407e3ace365f87a23ccb46"
-auth_token = "5e7b2c6563764d0d62dc00e18e1b5853"
-client = TwilioRestClient(account_sid, auth_token)
+from twilio.twiml.voice_response import VoiceResponse, Gather
 
 app = Flask(__name__)
 
 
-@app.route('/voice', methods=['POST'])
-def detect_humans():
-    r = twiml.Response()
-    r.say("Machines don't press keys, but humans do. Press a key now.")
-    r.gather(timeout="10", 
-             action="http://twimlbin.com/external/0d2c3c0909a0e23e")
-    r.say("Too bad, you did not press a key. Goodbye!")
- 
-    return str(r)
- 
-call = client.calls.create(to="+16175159619", from_="+14054001401",
-                           url="YOUR_VOICE_URL")
- 
+@app.route("/voice", methods=['GET', 'POST'])
+def voice():
+    """Respond to incoming phone calls with a menu of options"""
+    # Start our TwiML response
+    resp = VoiceResponse()
+
+    # Start our <Gather> verb
+    gather = Gather(num_digits=1)
+    gather.say('For sales, press 1. For support, press 2.')
+    resp.append(gather)
+
+    # If the user doesn't select an option, redirect them into a loop
+    resp.redirect('/voice')
+
+    return str(resp)
+
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
